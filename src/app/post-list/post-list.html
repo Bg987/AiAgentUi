@@ -1,0 +1,25 @@
+<div class="dashboard-container">
+    <div class="header-section">
+        <h1>🚀 Java Masterclass Library</h1>
+        <p>Explore all deep dives</p>
+    </div>
+
+    <div class="filter-card">
+        <div class="search-group">
+            <input type="text" [(ngModel)]="searchTopic" (input)="applyFilters()"
+                placeholder="Search Topic (e.g. Streams)..." class="form-control">
+            <input type="number" [(ngModel)]="searchId" (input)="applyFilters()" placeholder="ID"
+                class="form-control small">
+            <input type="date" [(ngModel)]="searchDate" (change)="applyFilters()" class="form-control">
+        </div>
+    </div>
+    <div class="notFound" *ngIf="filteredPosts.length==0">not found</div>
+    <div class="post-grid" *ngIf="filteredPosts">
+        <div class="post-card" *ngFor="let post of filteredPosts">
+            <div class="card-id">#{{ post.id }}</div>
+            <h3>{{ post.topic }}</h3>
+            <p class="post-meta">Published: {{ post.createdAt | date:'mediumDate' }}</p>
+            <button [routerLink]="['/post', post.id]" class="btn-primary">Read Masterclass →</button>
+        </div>
+    </div>
+</div>
